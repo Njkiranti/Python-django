@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Charts</title>
+    <!-- Include necessary libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px auto;
+            max-width: 800px;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: #007bff;
+        }
+
+        canvas {
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #fff; /* Add white background */
+        }
+
+        .chart-container {
+            margin-bottom: 40px; /* Increase bottom margin for better separation */
+            padding: 20px; /* Add padding for inner spacing */
+            border-radius: 10px; /* Add border-radius for rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+            background-color: #ffffff; /* White background */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chart-container">
+        <h2>Pie Chart</h2>
+        <canvas id="pieChart" width="400" height="400"></canvas>
+    </div>
+
+    <script>
+        var data = JSON.parse('{{ data_json|escapejs }}');
+        console.log(data); // Add this line to log data to the console
+        //Pie Chart
+        var ctxPie = document.getElementById('pieChart').getContext('2d');
+        var pieChart = new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: data.map(d => d.name),
+                datasets: [{
+                    data: data.map(d => d.value),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)',
+                        'rgba(255, 159, 64, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        display: false
+                    }],
+                    xAxes: [{
+                        display: false
+                    }]
+                }
+            }
+        });
+
+        
+    </script>
+</body>
+</html>

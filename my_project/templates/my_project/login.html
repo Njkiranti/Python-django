@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa; /* Light grey background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff; /* Blue header color */
+            margin-bottom: 30px;
+        }
+        
+        form {
+            width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            color: #333; /* Dark grey label color */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #007bff; /* Blue border color on focus */
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            background-color: #007bff; /* Blue submit button color */
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        .error {
+            color: #dc3545; /* Red color for error messages */
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Piracy Detection Software</h1>
+    <img src="my_project\f.png" >
+    <form method="post" action="{% url 'user_login' %}">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="fieldWrapper">
+            {{ form.username.errors }}
+            <label for="{{ form.username.id_for_label }}">Username:</label>
+            {{ form.username }}
+        </div>
+        <div class="fieldWrapper">
+            {{ form.password.errors }}
+            <label for="{{ form.password.id_for_label }}">Password:</label>
+            <input type="password" name="password" id="{{ form.password.id_for_label }}">
+        </div>
+        <button type="submit">Login</button>
+    </form>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li class="error">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
+

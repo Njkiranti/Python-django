@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Delete</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        form {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        button, a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover, a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Confirm Delete</h1>
+    <p>Are you sure you want to delete "<span style="color: #007bff;">{{ user.username }}</span>"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, Delete</button>
+    </form>
+    <a href="{% url 'user_list' %}" style="background-color: #ccc; color: #333;">Cancel</a>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customized Tabs</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS for tabs */
+        .nav-tabs {
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .nav-tabs .nav-item {
+            border-right: 1px solid #ddd;
+        }
+
+        .nav-tabs .nav-link {
+            color: #333;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .nav-tabs .nav-link.active {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .tab-content {
+            padding: 20px;
+        }
+
+        .tab-pane {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-pane h3 {
+            color: #333;
+        }
+
+        .tab-pane p {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link " href="#tab1" data-toggle="tab">Piracy Detection Software</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="#tab2" data-toggle="tab">Piracy Detection</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#tab3" data-toggle="tab">User Behaviour</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#tab4" data-toggle="tab">User</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#tab5" data-toggle="tab">Location</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#tab6" data-toggle="tab">Hashing</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#tab7" data-toggle="tab">Send E-mail</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#tab8" data-toggle="tab">Graphical Representation</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#tab9" data-toggle="tab">Reports</a>
+        </li>
+    </ul>
+  
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab1">
+            <h3>Piracy Detection</h3>
+            <img src="my_project/g.png" alt="Piracy Detection Image">
+        </div>
+        <div class="tab-pane active" id="tab2">
+            <h3>Piracy Detection</h3>
+        </div>
+  
+        <div class="tab-pane" id="tab3">
+            <h3>User Behaviour</h3>
+        </div>
+  
+        <div class="tab-pane" id="tab4">
+            <h3>User</h3>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown Button
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{% url 'user_form' %}">User Login Form</a>
+                    <a class="dropdown-item" href="{% url 'user_list' %}">User List</a>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="tab5">
+            <h3>Location</h3>
+        </div>
+        <div class="tab-pane" id="tab6">
+            <h3>Hashing</h3>
+        </div>
+        <div class="tab-pane" id="tab7">
+            <h3>Send Mail</h3>
+        </div>
+        <div class="tab-pane" id="tab8">
+            <h3>Graphical Representation Piracy Detection</h3>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown Button
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{% url 'barchart' %}">Bar Chart</a>
+                    <a class="dropdown-item" href="{% url 'piechart' %}">Pie Chart</a>
+                    <a class="dropdown-item" href="{% url 'chart' %}">Histogram</a>
+                    <a class="dropdown-item" href="{% url 'linegraph' %}">Line Graph</a>
+
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="tab9">
+            <h3>Report</h3>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown Button
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{% url 'piracy_data' %}">Piracy Detection Report</a>
+                    <a class="dropdown-item" href="{% url 'user_behaviour_data' %}">User Behavior Report</a>
+                    <a class="dropdown-item" href="{% url 'upload_file' %}">File Upload</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            // Enable Bootstrap's tab functionality
+            $('.nav-tabs a').click(function (e) {
+                e.preventDefault()
+                $(this).tab('show')
+            })
+    
+            // Enable dropdown toggling
+            $('.dropdown-toggle').dropdown();
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('.nav-link').on('click', function(){
+                var tabId = $(this).attr('href');
+                // Replace '/user_delete/' with the actual URL of the user_delete.html page
+                if(tabId === '#tab2'){
+                    window.location.href = "{% url 'piracy_detection' %}";'my_project/piracy_detection/';
+                } else if(tabId === '#tab3'){
+                    window.location.href = "{% url 'user_behaviour' %}";'my_project/user_behaviour/';
+                }
+                else if(tabId === '#tab5'){
+                    window.location.href = "{% url 'device_location_view' %}";
+                }
+                else if(tabId === '#tab6'){
+                    window.location.href = "{% url 'hashing' %}";
+                }
+                else if(tabId === '#tab7'){
+                    window.location.href =  "{% url 'send_mail' %}";
+                }
+                
+            });
+        });
+    </script>
+    
+</body>
+</html>

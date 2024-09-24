@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Line Graph</title>
+    <!-- Include Plotly library -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <!-- Container for the line graph -->
+    <div id="line-graph-container"></div>
+
+    <!-- JavaScript code to render the line graph -->
+    <script>
+        // Parse the JSON data
+        var graphData = JSON.parse('{{ graph_json|escapejs }}');
+
+        // Render the line graph
+        Plotly.newPlot('line-graph-container', graphData.data, graphData.layout);
+    </script>
+</body>
+</html>

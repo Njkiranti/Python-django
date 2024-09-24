@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piracy Detection</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa; /* Light grey background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        h2 {
+            color: #007bff; /* Blue header color */
+            margin-bottom: 20px;
+        }
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333; /* Dark grey label color */
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            transition: border-color 0.3s ease-in-out;
+        }
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #007bff; /* Blue border color on focus */
+        }
+        button[type="submit"] {
+            width: 100%;
+            background-color: #007bff; /* Blue submit button color */
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        #result {
+            margin-top: 20px;
+            color: #333; /* Dark grey result text color */
+        }
+    </style>
+</head>
+<body>
+    <h2>Piracy Detection</h2>
+    <form id="piracyForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <label for="ip_address">IP Address:</label>
+        <input type="text" id="ip_address" name="ip_address">
+        <label for="device_info">Device Info:</label>
+        <input type="text" id="device_info" name="device_info">
+        <button type="submit">Check for Piracy</button>
+    </form>
+ 
+    <script>
+        $(document).ready(function() {
+            $('#piracyForm').submit(function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                // Serialize form data
+                var formData = $(this).serialize();
+                // Send AJAX request
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "piracy_detection" %}', // URL to the view for piracy detection
+                    headers: { "X-CSRFToken": "{{ csrf_token }}" }, // CSRF token
+                    data: formData, // Form data
+                    dataType: 'json', // Expected response data type
+                    success: function(response) {
+                        // Check if the response contains 'piracy_status' key
+                        if ('piracy_status' in response) {
+                            var piracyStatus = response.piracy_status;
+                            $('#result').text('Predicted Piracy Detection Result: ' + piracyStatus);
+                        } else {
+                            $('#result').text('Invalid response from server.');
+                        }
+                    },
+                    error: function(xhr, errmsg, err) {
+                        $('#result').text('Error occurred while checking piracy.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

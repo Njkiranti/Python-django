@@ -1,0 +1,65 @@
+<!-- user_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>User List</h1>
+    {% if users %}
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Last Login</th>
+                <th>Is Superuser</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Is Staff</th>
+                <th>Is Active</th>
+                <th>Date Joined</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.password|default:"N/A" }}</td>
+                <td>{{ user.last_login|default:"N/A" }}</td>
+                <td>{{ user.is_superuser|default:"N/A" }}</td>
+                <td>{{ user.first_name|default:"N/A" }}</td>
+                <td>{{ user.last_name|default:"N/A" }}</td>
+                <td>{{ user.email|default:"N/A" }}</td>
+                <td>{{ user.is_staff|default:"N/A" }}</td>
+                <td>{{ user.is_active|default:"N/A" }}</td>
+                <td>{{ user.date_joined|default:"N/A" }}</td>
+                <td><a href="{% url 'user_delete' user.pk %}">Delete</a></td> <!-- Pass user's pk to user_delete view -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No users found.</p>
+    {% endif %}
+    <a href="{% url 'user_form' %}">Create New User</a>
+</body>
+</html>
